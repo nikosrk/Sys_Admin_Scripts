@@ -1,0 +1,42 @@
+
+#!/bin/bash
+
+#Συνάρτηση ελέγχου για την εγκυροτητα του κωδικου οπου επιστρεφεται μια boolean τιμη
+check_passwd(){
+
+if [ "${#upass}" -gt 5 ] && [[ $upass =~ [a-z] ]] && [[ $upass =~ [A-Z] ]] && [[ $upass =~ [0-9] ]] && [[ $upass =~ [!@#\$%^\&*()_+] ]]
+then 
+ return 0
+else
+ return 1
+fi
+}
+
+#με την εντολη echo εκτυπωνουμε, ενω με την read διαβαζουμε πραγματα για τον χρηστη
+echo -n Enter Name: 
+read uname
+echo -n Enter Password:
+read upass
+#καλουμε την συναρτηση που θα μας επιστρεψει μια τιμη
+check_passwd "$upass" 
+#εαν η επιστρεφομενη τιμη ειναι 0, θα μπει στην if
+if [ $? -eq 0 ]
+ then
+ echo -n Enter Description:
+ read dis
+ echo -n "Enter Group(programmers, finance, market): "
+ read ugroup
+ #με την εντολη useradd προσθετουμε τον νεο χρηστη με ονομα uname
+ #με το option -d δημιουργουμε το καταλληλο directory για τον χρηστη
+ #με το option -c προσθετουμε discription
+ #με το option -G προσθετουμε τον χρηστη στο καταλληλο group
+ sudo useradd -m -d /home/$uname -c "$dis" $uname -G $ugroup
+ #με το συγκεκριμενο pipe αλλαζουμε τον by-default κωδικο για τον χρηστη(!) σε upass
+ echo "$uname:$upass" | chpasswd
+ #δινω στον εκαστοτε χρηστη δικαιωματα u: rwx, g: rw, o: rw
+ sudo chmod 766 $uname
+else 
+ #εαν ο κωδικος ειναι λαθος κλεινει το πραγραμμα επειτα απο δυο sec
+ sleep 2
+fi
+

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+
+for i in /home/*
+do
+ echo 'shopt -s histappend' >> $i/.bashrc
+ echo 'PROMPT_COMMAND="history -a;$PROMPT_COMMAND"' >> $i/.bashrc
+ echo 'export HISTTIMEFORMAT="%d%m%y %T"' >> $i/.bashrc
+done

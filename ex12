@@ -1,0 +1,9 @@
+#!/bin/bash
+
+#διαβαζουμε απο το διαχειρηστη το ονομα του user για τον οποιο
+#θελουμε να βρουμε τις διεργασιες του
+echo -n Enter User:  
+read DefaultUser
+#εμφανιζουμε τις διεργασιες για συγκεκριμενο username με το
+#option -U της εντολης top
+top -U $DefaultUser

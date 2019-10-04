@@ -1,0 +1,11 @@
+#!/bin/bash
+
+#λεμε στο χρηστη να εισαγει μια πατερνα
+echo -n Enter a keyword: 
+#διαβαζει απο τον χρηστη
+read keyword
+#με την εντολη grep αναζηταμε την πατερνα που εδωσε ο χρηστης σε ολους τους users(*) το αρχειο .bash_history
+grep -e "$keyword" /home/*/.bash_history
+
+
+

@@ -1,0 +1,42 @@
+#!/bin/bash
+
+#λεμε στον χρηστη να δωσει μια αρχικη ημερομηνια και επειτα μια τελικη
+echo "Give me strating date"
+read start_date 
+echo "Give ending date"
+read end_date
+#με την εντολη lastb εμφανιζονται ολα fail attempts για τους χρηστης 
+#με το οption -s προσδιοριζουμε μια αρχικη και με το -t μια τελικη ημερομηνια 
+sudo lastb -s $start_date -t $end_date
+
+#αναζητουμε την λεξη root στο αρχειο ../../auth.log οπου εχει ιστορικο με ολα τα login(επιτυχημενες η οχι)
+#και το αποτελεσμα το κανουμε overwrite στο αρχεια rootMe.txt
+grep -e "root" /var/log/auth.log > rootMe.txt
+
+echo All fail-or not attempts are in file rootMe.txt
+#αναζητουμε πλεον για τις αποτυχημενες προσπαθειες login σαν root και το αποτελεσμα το κανουμε overwrite στο αρχειο failMe.txt
+grep -e "FAILED" rootMe.txt > failMe.txt 
+
+#δημιουργω αρχειο με ολους τους χρηστες τους συστηματος
+ls /home > users.txt
+ 
+for line in `cat usernames.txt`;
+do
+	#βαζω σε μια μεταβλητη το αποτελεσμα-αριθμο-των αποτυχημενων προσπαθειων ενος χρηστη να εισελεθει στο συστημα
+	a=$(grep -e "$line" failMe.txt | wc -l)
+	#εαν αυτο ειναι παραπανω απο 8 τοτε μπαινει στην if
+	if [ $a -gt 8 ]
+	then
+	echo -n "Do you want to delete the user : $line (yes or no)?"
+	read answer
+	 #εαν η απαντηση του χρηστη ειναι yes τοτε οκαρει τον χρηστη
+	 if [ $answer = 'yes' ]
+	 then
+		#με το option -L της εντολης usermod απενεργοποιω τον χρηστη
+		usermod -L $line
+	 else 
+	 echo "User will not be locked"
+	 fi
+	fi
+done
+
