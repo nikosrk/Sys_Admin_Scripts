@@ -1,6 +1,6 @@
 #!/bin/bash
-#Γραφω στο αρχειο ολα τα αρχεια με δικαιωματα SUID
-#και στη λιστα μου εμφανιζω ονομα δικαιωματα και ημερομηνια
+
+#I'm writing to the /tmp/SUIDfile all files with SUID rights and i list the files with name, permissions and date
 sudo find / -perm -4000 -exec ls -ldb {} \; > /tmp/SUIDfile
-#ανοιγω το αρχειο για να εμφανιστουν τα περιεχομενα
+
 more /tmp/SUIDfile 

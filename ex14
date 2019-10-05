@@ -1,6 +1,6 @@
 #!/bin/bash
-#με την εντολη netstat -autp εμφανιζω ολες τις udp
-#και tcp συνδεσεις που χρησημοποιουν οι εφαρμογες μας
+#With netstat -autp command we display all the udp
+#and tcp network connections
 #-a(all) -u(udp) -t(tcp) -p(program)
 netstat -autp
 

@@ -1,11 +1,12 @@
 #!/bin/bash
-#εμφανιζουμε το ονομα του εξυπηρετητη οπως και την εκδοση
-#του λειτουργικου μας συστηματος
+
+#Show current system hostname and related info
 hostnamectl | grep -e Static -e Operating
-#Εμφανιζουμε το χρονο που το συστημα μας ειναι ανοιχτο
+#Tells how long the system has been running.
+#option -s : system up since, in yyyy-mm-dd HH:MM:SS format
 echo To systhma einai anoixto apo tis: 
 uptime -s
-#Εμφανιζουμε τον καταλογο των συνδεδεμενων χρηστων αυτη τη στιγμη
+#List of active users
 who --ips
 
 

@@ -3,7 +3,9 @@
 
 for i in /home/*
 do
+ #Update History in real time 
  echo 'shopt -s histappend' >> $i/.bashrc
  echo 'PROMPT_COMMAND="history -a;$PROMPT_COMMAND"' >> $i/.bashrc
+ #Timestamp in Bash History
  echo 'export HISTTIMEFORMAT="%d%m%y %T"' >> $i/.bashrc
 done

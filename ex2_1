@@ -1,10 +1,10 @@
 #!/bin/bash
 
-#λεμε στο χρηστη να εισαγει μια πατερνα
+#Pattern for search 
 echo -n Enter a keyword: 
-#διαβαζει απο τον χρηστη
 read keyword
-#με την εντολη grep αναζηταμε την πατερνα που εδωσε ο χρηστης σε ολους τους users(*) το αρχειο .bash_history
+
+#With grep command we search the pattern for all users(*) in .bash_history
 grep -e "$keyword" /home/*/.bash_history
 
 

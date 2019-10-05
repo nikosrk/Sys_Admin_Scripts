@@ -1,10 +1,12 @@
 #!/bin/bash
-#επιλεγω τους χρηστες που δεν εχουν κωδικο και τους γραφω στο αρχειο
+
+#Write users without password in the file UsersWithoutPass.txt
 sudo awk -F":" '($2 == "") {print $1}' /etc/shadow > touch  UsersWithoutPass.txt
-#Εκτυπωνω τους χρηστες που θα απενεργοποιηθουν
+
 echo Users without password are:
 cat UsersWithoutPass.txt
-#Απενεργοποιω τους χρηστες που ειναι γραμμενοι στο αρχειο μου
+
+#Lock the users tha are in the UsersWithoutPass.txt
 for line in `cat UsersWithoutPass.txt`; 
 do    
     sudo usermod -L $line    

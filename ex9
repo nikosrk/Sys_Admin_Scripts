@@ -1,14 +1,13 @@
 #! /bin/bash
 
 echo ----Memory info----
-#εμφανιζουμε πληροφοριες για την τρεχουσα κατασταση της μνημης
 free -m
 free -m >> readMe.txt
+
 echo ----CPU info----
-#εμφανιζουμε την τρεχουσα κατασταση του επεξεργαστη
 mpstat
 mpstat >> readMe.txt
+
 echo ----Hard disk info----
-#Εμφανιζουμε την τρεχουσα κατασταση του σκληρου δισκου μας
 iostat
 iostat >> readMe.txt
